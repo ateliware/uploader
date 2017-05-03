@@ -8,7 +8,7 @@ two routes:
 - `GET /token` - this route gives the user a unique authentication
 token to upload one file. You can optionally make this an
 authenticated route, by giving the app an user and a password with
-the environment variables `AW_USER` and `AW_PSWD`. The tokens are
+the environment variables `USER` and `PSWD`. The tokens are
 automatically expired in 3 hours.
 - `POST /upload` - this route uploads a file to the storage service
 configured.  This route takes two required params: `file`, which is

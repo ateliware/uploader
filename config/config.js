@@ -6,7 +6,7 @@ const config = {
     path: "dev-files",
     resources: {
       projectId: "uploader",
-      keyFilename: process.env.AW_KEYFILE || `${process.cwd()}/keyfile.json`
+      keyFilename: process.env.KEYFILE || `${process.cwd()}/keyfile.json`
     }
   },
   test: {
@@ -16,17 +16,17 @@ const config = {
     path: "test-files",
     resources: {
       projectId: "uploader",
-      keyFilename: process.env.AW_KEYFILE || `${process.cwd()}/keyfile.json`
+      keyFilename: process.env.KEYFILE || `${process.cwd()}/keyfile.json`
     }
   },
   production: {
     env: "production",
     bucketPrefix: "https://storage.googleapis.com",
-    bucket: process.env.AW_BUCKET,
+    bucket: process.env.BUCKET,
     path: "prod-files",
     resources: {
-      projectId: process.env.AW_PROJECT_ID,
-      keyFilename: process.env.AW_KEYFILE
+      projectId: process.env.PROJECT_ID,
+      keyFilename: process.env.KEYFILE
     }
   }
 }

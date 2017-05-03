@@ -10,7 +10,7 @@ const app = express()
 
 const bucket = require('./src/gcloud/bucket')
 
-const PORT = process.env.AW_PORT || 3000
+const PORT = process.env.PORT || 3000
 const LIMIT = '50mb'
 
 app.use(morgan('tiny'))
@@ -49,8 +49,8 @@ app.post('/upload', upload.single('file'), (req, res) => {
 })
 
 const validCredentials = (credentials) => {
-  let user = process.env.AW_USER
-  let pswd = process.env.AW_PSWD
+  let user = process.env.USER
+  let pswd = process.env.PSWD
 
   return (user === undefined && pswd === undefined) ||
     (credentials && credentials.name === user && credentials.pass === pswd)

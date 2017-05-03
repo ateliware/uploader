@@ -12,8 +12,8 @@ RUN npm install
 COPY . /app
 
 ENV NODE_ENV=production
-ENV AW_PORT=3000
+ENV PORT=3000
 
-EXPOSE $AW_PORT
+EXPOSE $PORT
 CMD ["npm", "start"]
 
