@@ -1,5 +1,7 @@
 # uploader
 
+[![Build Status](https://travis-ci.org/ateliware/uploader.svg?branch=master)](https://travis-ci.org/ateliware/uploader)
+
 The ateliware default uploader app. This is a simple web app with
 two routes:
 
