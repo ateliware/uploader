@@ -2,7 +2,7 @@ const upload = require('./uploadStrategy')
 const uuid = require('node-uuid')
 const Cache = require('node-cache')
 
-const base64Header = new RegExp("^data:([^/]+)/([^;]+);base64,?")
+const base64Header = new RegExp("^data:(([^/]+)/([^;]+));base64,?")
 const tokens = new Cache({stdTTL: 60 * 60 * 3})
 
 module.exports.generateToken = () => {
@@ -16,16 +16,28 @@ const isValidToken = (token) => {
   return token && (tokens.del(token) > 0)
 }
 
-const doUploadBuffer = (buffer, matches) => {
+const generateFilename = (extension, orig) => {
+  if(orig) return `${uuid.v1()}-${orig}`
+  return `${uuid.v1()}.${extension}`
+}
+
+const doUploadBuffer = (buffer, matches, originalFilename) => {
   if(!matches) return Promise.reject("invalid_file")
 
-  const [match, filetype, extension] = matches
-  const filename = `${uuid.v1()}.${extension}`
-  const body = {key: filename, buffer: buffer}
+  const [match, mimetype, filetype, extension] = matches
+  const body = {
+    key: generateFilename(extension, originalFilename),
+    buffer: buffer
+  }
 
   const url = `${upload.getBucketPath()}/${body.key}`
   const uploadStrategy = upload.getUploadStrategy()
-  const result = {url: url, filetype: filetype, extension: extension}
+  const result = {
+    url: url,
+    mimetype: mimetype,
+    filetype: filetype,
+    extension: extension
+  }
 
   return new Promise((resolve, reject) => {
     uploadStrategy(resolve, reject, body)
@@ -49,6 +61,7 @@ module.exports.uploadBuffer = (token, file) => {
 
   return doUploadBuffer(
     file.buffer,
-    new RegExp("^([^/]+)/(.+)$").exec(file.mimetype)
+    new RegExp("^(([^/]+)/(.+))$").exec(file.mimetype),
+    file.originalname
   )
 }
