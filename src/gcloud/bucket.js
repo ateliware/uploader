@@ -17,7 +17,7 @@ const isValidToken = (token) => {
 }
 
 const generateFilename = (extension, orig) => {
-  if(orig) return `${uuid.v1()}-${orig}`
+  if(orig) return `${uuid.v1()}/${orig}`
   return `${uuid.v1()}.${extension}`
 }
 
