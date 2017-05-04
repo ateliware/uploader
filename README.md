@@ -89,15 +89,13 @@ image to hub.docker.com.
 #### Building and pushing the image
 
 - Upgrade the version in [`package.json`](./package.json) with:
-  - `VERSION=$(npm version major)` when you make incompatible API changes
-  - `VERSION=$(npm version minor)` when you add functionality in a
+  - `VERSION=$(npm version major | cut -c 2-)` when you make incompatible API changes
+  - `VERSION=$(npm version minor | cut -c 2-)` when you add functionality in a
   backwards-compatible manner
-  - `VERSION=$(npm version patch)` when you make backwards-compatible
+  - `VERSION=$(npm version patch | cut -c 2-)` when you make backwards-compatible
   bug fixes
   - For more details in about versioning, [read this](http://semver.org)
-- Build the docker image `docker build -t
-ateliware/uploader:$(echo $VERSION | cut -c 2-) .`
-- Publish to docker hub `docker push
-ateliware/uploader:$(echo $VERSION | cut -c 2-)`
+- Build the docker image `docker build -t ateliware/uploader:$VERSION .`
+- Publish to docker hub `docker push ateliware/uploader:$VERSION`
 - SHIP IT! :shipit:
 
