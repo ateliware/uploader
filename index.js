@@ -49,8 +49,8 @@ app.post('/upload', upload.single('file'), (req, res) => {
 })
 
 const validCredentials = (credentials) => {
-  let user = process.env.USER
-  let pswd = process.env.PSWD
+  let user = process.env.UPLOADER_USER
+  let pswd = process.env.UPLOADER_PSWD
 
   return (user === undefined && pswd === undefined) ||
     (credentials && credentials.name === user && credentials.pass === pswd)

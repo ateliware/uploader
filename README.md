@@ -24,10 +24,10 @@ so here we go:
   - `test` - to use on your test environment and CI
   - `production` - to use on your production deployed app
 - `PORT` - the port used to start the server on
-- `USER` - the username to use in the authentication system for the
-`GET \token` route.
-- `PSWD` - the password to use in the authentication system for the
-`GET \token` route.
+- `UPLOADER_USER` - the username to use in the authentication system for
+the `GET \token` route.
+- `UPLOADER_PSWD` - the password to use in the authentication system for
+the `GET \token` route.
 
 The following keys are required only in production environment:
 
